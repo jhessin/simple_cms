@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'subjects/index'
-  get 'subjects/show'
-  get 'subjects/new'
-  get 'subjects/edit'
-  get 'subjects/delete'
-
   root 'home#index'
+
+  resources :subjects do
+    member do
+      get :delete
+    end
+  end
 
   get 'home/index'
   get 'demo/index'
