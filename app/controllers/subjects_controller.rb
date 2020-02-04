@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
+# The Controller for all of our subjects
 class SubjectsController < ApplicationController
-  def index; end
+  def index
+    @subjects = Subject.sorted
+    # render('index')
+  end
 
-  def show; end
+  def show
+    @subject = Subject.find(params[:id])
+  end
 
   def new; end
 
