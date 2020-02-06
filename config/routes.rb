@@ -9,6 +9,18 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :sections do
+    member do
+      get :delete
+    end
+  end
+
+  resources :pages do
+    member do
+      get :delete
+    end
+  end
+
   get 'home/index'
   get 'demo/index'
   # ^ is equivalent to v
