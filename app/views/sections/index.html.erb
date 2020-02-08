@@ -13,16 +13,18 @@
     <tr class="header">
       <th>#</th>
       <th>section</th>
+      <th>Page</th>
       <th>Visible</th>
-      <th>Pages</th>
+      <th>Content Type</th>
       <th>Actions</th>
     </tr>
     <% @sections.each do |section| %>
       <tr>
         <td><%= section.position %></td>
         <td><%= section.name %></td>
+        <td><%= section.page.name %></td>
         <td class="center"><%= section.visible ? 'Yes' : 'No' %></td>
-        <td class="center"><%= section.pages.size %></td>
+        <td> <%= section.content_type %></td>
         <td class="actions">
           <%= link_to('Show', section_path(section), class: 'action show') %>
           <%= link_to('Edit', edit_section_path(section), class: 'action edit') %>

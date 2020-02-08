@@ -6,16 +6,28 @@
   <%= form_for(@section) do |f| %>
     <table summary="section form fields">
       <tr>
-        <th>Name</th>
-        <td><%= f.text_field(:name) %></td>
-      </tr>
-      <tr>
         <th>Position</th>
         <td><%= f.text_field(:position) %></td>
       </tr>
       <tr>
+        <th>Name</th>
+        <td><%= f.text_field(:name) %></td>
+      </tr>
+      <tr>
+        <th>Page</th>
+        <td><%= f.collection_select :page_id, Page.all, :id, :name %></td>
+      </tr>
+      <tr>
         <th>Visible</th>
-        <td><%= f.text_field(:visible) %></td>
+        <td><%= f.check_box(:visible) %></td>
+      </tr>
+      <tr>
+        <th>Content Type</th>
+        <td><%= f.text_field(:content_type) %></td>
+      </tr>
+      <tr>
+        <th>Content</th>
+        <td><%= f.text_area(:content) %></td>
       </tr>
     </table>
 
