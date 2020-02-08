@@ -2,7 +2,7 @@
 
 class SectionsController < ApplicationController
   def index
-    @sections = Section.all
+    @sections = Section.sorted
   end
 
   def new
@@ -14,7 +14,7 @@ class SectionsController < ApplicationController
 
     if @section.save
       flash[:notice] = 'Section created successfully'
-      redirect_to section_path(@section)
+      redirect_to sections_path
     else
       flash[:error] = 'Error creating section'
       render 'new'

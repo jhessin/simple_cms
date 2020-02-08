@@ -9,13 +9,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :sections do
+  resources :pages do
     member do
       get :delete
     end
   end
 
-  resources :pages do
+  resources :sections do
     member do
       get :delete
     end
