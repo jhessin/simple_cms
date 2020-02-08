@@ -27,6 +27,7 @@ class SubjectsController < ApplicationController
       redirect_to(subjects_path)
     else
       # If save fails, redisplay the form so user can fix problems
+      flash[:error] = 'Error saving page'
       render('new')
     end
   end
@@ -45,6 +46,7 @@ class SubjectsController < ApplicationController
       redirect_to(subject_path(@subject))
     else
       # If save fails, redisplay the form so user can fix problems
+      flash[:error] = 'Error saving page'
       render('edit')
     end
   end

@@ -4,31 +4,31 @@
   </div>
 <% end %>
 
-<%= link_to('<< Back to List', subjects_path, class: 'back-link') %>
+<%= link_to('<< Back to List', sections_path, class: 'back-link') %>
 
-<div class="subjects show">
-  <h2>Show Subject</h2>
+<div class="sections show">
+  <h2>Show section</h2>
 
-  <table summary="Subject detail view">
+  <table summary="section detail view">
     <tr>
       <th>Name</th>
-      <td><%= @subject.name %></td>
+      <td><%= @section.name %></td>
     </tr>
     <tr>
       <th>Position</th>
-      <td><%= @subject.position %></td>
+      <td><%= @section.position %></td>
     </tr>
     <tr>
       <th>Visible?</th>
-      <td><%= @subject.visible ? 'true' : 'false' %></td>
+      <td><%= @section.visible ? 'true' : 'false' %></td>
     </tr>
     <tr>
       <th>Created</th>
-      <td><%= @subject.created_at %></td>
+      <td><%= @section.created_at %></td>
     </tr>
     <tr>
       <th>Updated</th>
-      <td><%= @subject.updated_at %></td>
+      <td><%= @section.updated_at %></td>
     </tr>
   </table>
 </div>

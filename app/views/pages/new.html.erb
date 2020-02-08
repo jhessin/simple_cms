@@ -1,13 +1,21 @@
-<%= link_to('<< Back to List', subjects_path, class: 'back-link') %>
+<%= link_to('<< Back to List', pages_path, class: 'back-link') %>
 
-<div class="subject new">
-  <h2>Create Subject</h2>
+<div class="page new">
+  <h2>Create Page</h2>
 
-  <%= form_for(@subject) do |f| %>
-    <table summary="Subject form fields">
+  <%= form_for(@page) do |f| %>
+    <table summary="Page form fields">
       <tr>
         <th>Name</th>
         <td><%= f.text_field(:name) %></td>
+      </tr>
+      <tr>
+        <th>Subject</th>
+        <td><%= f.collection_select( :subject_id, Subject.all, :id, :name ) %></td>
+      </tr>
+      <tr>
+        <th>Permalink</th>
+        <td><%= f.text_field(:permalink) %></td>
       </tr>
       <tr>
         <th>Position</th>
@@ -15,12 +23,12 @@
       </tr>
       <tr>
         <th>Visible</th>
-        <td><%= f.text_field(:visible) %></td>
+        <td><%= f.check_box(:visible) %></td>
       </tr>
     </table>
 
     <div class="form-buttons">
-      <%= f.submit('Create Subject') %>
+      <%= f.submit('Create Page') %>
     </div>
   <% end %>
 </div>
