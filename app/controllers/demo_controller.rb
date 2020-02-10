@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DemoController < ApplicationController
-  layout false
+  layout 'application'
 
   def index
     render 'index'
