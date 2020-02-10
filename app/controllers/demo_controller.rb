@@ -1,5 +1,6 @@
-class DemoController < ApplicationController
+# frozen_string_literal: true
 
+class DemoController < ApplicationController
   layout false
 
   def index
@@ -14,10 +15,14 @@ class DemoController < ApplicationController
   end
 
   def other_hello
-    redirect_to( action: 'hello' )
+    redirect_to(action: 'hello')
   end
 
   def lynda
     redirect_to('http://lynda.com')
+  end
+
+  def escape_output
+    # Escape output
   end
 end

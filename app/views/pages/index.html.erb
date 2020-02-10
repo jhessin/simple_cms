@@ -1,10 +1,5 @@
-<% unless flash[:notice].blank? %>
-  <div class="notice">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
-<div class="subject index">
+<% @page_title = 'Page Index' %>
+<div class="page index">
   <h2>Pages</h2>
 
   <%= link_to('Add New Page', new_page_path, class: 'action new') %>
@@ -24,7 +19,7 @@
         <td><%= page.name %></td>
         <td><%= page.subject.name %></td>
         <td><%= page.permalink %></td>
-        <td class="center"><%= page.visible ? 'Yes' : 'No' %></td>
+        <td class="center"><%= status_tag page.visible %></td>
         <td class="actions">
           <%= link_to('Show', page_path(page), class: 'action show') %>
           <%= link_to('Edit', edit_page_path(page), class: 'action edit') %>
