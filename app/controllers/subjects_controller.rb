@@ -29,7 +29,7 @@ class SubjectsController < ApplicationController
     else
       # If save fails, redisplay the form so user can fix problems
       flash[:error] = 'Error saving page'
-      # @subject_count = Subject.count + 1
+      @subject_count = Subject.count + 1
       render('new')
     end
   end
@@ -50,7 +50,7 @@ class SubjectsController < ApplicationController
     else
       # If save fails, redisplay the form so user can fix problems
       flash[:error] = 'Error saving page'
-      # @subject_count = Subject.count
+      @subject_count = Subject.count
       render('edit')
     end
   end

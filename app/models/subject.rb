@@ -3,6 +3,8 @@
 class Subject < ApplicationRecord
   has_many :pages
 
+  validates_presence_of :name
+
   # scope :visible, -> { where(visible: true) }
   # scope :invisible, -> { where(visible: false) }
   # scope :sorted, -> { order('position ASC') }

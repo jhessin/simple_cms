@@ -8,7 +8,6 @@ class SectionsController < ApplicationController
   def new
     @section = Section.new
     @section_count = Section.count + 1
-    @pages = Page.sorted
   end
 
   def create
@@ -19,8 +18,7 @@ class SectionsController < ApplicationController
       redirect_to sections_path
     else
       flash[:error] = 'Error creating section'
-      # @section_count = Section.count + 1
-      # @pages = Page.sorted
+      @section_count = Section.count + 1
       render 'new'
     end
   end
@@ -32,7 +30,6 @@ class SectionsController < ApplicationController
   def edit
     @section = Section.find params[:id]
     @section_count = Section.count
-    @pages = Page.sorted
   end
 
   def update
@@ -43,8 +40,7 @@ class SectionsController < ApplicationController
       redirect_to section_path(@section)
     else
       flash[:error] = 'Error updating section'
-      # @section_count = Section.count
-      # @pages = Page.sorted
+      @section_count = Section.count
       render 'edit'
     end
   end
