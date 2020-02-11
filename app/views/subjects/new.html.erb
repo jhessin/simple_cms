@@ -1,4 +1,4 @@
-<%= @page_title = 'New Subject' %>
+<% @page_title = 'New Subject' %>
 <%= link_to('<< Back to List', subjects_path, class: 'back-link') %>
 
 <div class="subject new">
@@ -7,6 +7,10 @@
   <%= form_for(@subject) do |f| %>
 
     <%= render partial: 'form', locals: {f: f} %>
+
+    <div class="form-buttons">
+      <%= f.submit('Create Subject') %>
+    </div>
 
   <% end %>
 </div>

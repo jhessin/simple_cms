@@ -13,6 +13,8 @@ class PagesController < ApplicationController
     @page = Page.new(
       name: 'New Page'
     )
+    @page_count = Page.count + 1
+    @subjects = Subject.sorted
   end
 
   def create
@@ -23,12 +25,16 @@ class PagesController < ApplicationController
       redirect_to pages_path
     else
       flash[:error] = 'Error saving page'
+      # @page_count = Page.count + 1
+      # @subjects = Subject.sorted
       render('new')
     end
   end
 
   def edit
     @page = Page.find(params[:id])
+    @page_count = Page.count
+    @subjects = Subject.sorted
   end
 
   def update
@@ -39,6 +45,8 @@ class PagesController < ApplicationController
       redirect_to page_path(@page)
     else
       flash[:error] = 'Error saving page'
+      # @page_count = Page.count
+      # @subjects = Subject.sorted
       render 'edit'
     end
   end
