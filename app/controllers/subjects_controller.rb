@@ -2,6 +2,10 @@
 
 # The Controller for all of our subjects
 class SubjectsController < ApplicationController
+  before_action :find_subjects, only: [:index]
+  before_action :find_subject, only: %i[show edit update delete destroy]
+  before_action :set_subject_count, only: %i[edit update new create]
+
   def index
     @subjects = Subject.sorted
     # render('index')
@@ -70,5 +74,18 @@ class SubjectsController < ApplicationController
 
   def subject_params
     params.require(:subject).permit(:name, :position, :visible)
+  end
+
+  def find_subjects
+    @subjects = Subject.sorted
+  end
+
+  def find_subject
+    @subject = Subject.find params[:id]
+  end
+
+  def set_subject_count
+    @subject_count = Subject.count
+    @subject_count += 1 if %w[new create].include? params[:action]
   end
 end
