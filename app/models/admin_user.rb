@@ -9,6 +9,7 @@ class AdminUser < ApplicationRecord
   has_many :sections, through: :section_edits
 
   EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i.freeze
+  FORBIDDEN_USERNAMES = %w[littlebopeep humptydumpty marymary].freeze
 
   validates :first_name,
             presence: true,
@@ -36,4 +37,14 @@ class AdminUser < ApplicationRecord
             },
             format: EMAIL_REGEX,
             confirmation: true
+
+  validate :username_allowed
+
+  private
+
+  def username_allowed
+    return unless FORBIDDEN_USERNAMES.include? username
+
+    errors.add :username, 'has been restricted from use'
+  end
 end
