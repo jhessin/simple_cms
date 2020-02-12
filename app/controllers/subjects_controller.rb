@@ -7,8 +7,7 @@ class SubjectsController < ApplicationController
   before_action :set_subject_count, only: %i[edit update new create]
 
   def index
-    @subjects = Subject.sorted
-    # render('index')
+    logger.debug('### Testing the logger. ###')
   end
 
   def show
