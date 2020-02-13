@@ -3,7 +3,7 @@
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   # rubocop:enable Metrics/BlockLength
-  root 'admin'
+  root 'access#menu'
 
   get 'admin', to: 'access#menu'
   get 'access/menu'
