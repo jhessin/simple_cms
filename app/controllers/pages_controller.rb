@@ -1,18 +1,21 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  before_action :find_pages, only: [:index]
+  before_action :find_subject
   before_action :find_page, only: %i[show edit update delete destroy]
   before_action :set_page_count, only: %i[edit update new create]
   before_action :confirm_login
 
-  def index; end
+  def index
+    @pages = @subject.pages.sorted
+  end
 
   def show; end
 
   def new
     @page = Page.new(
-      name: 'New Page'
+      name: 'New Page',
+      subject_id: @subject.id
     )
   end
 
@@ -21,7 +24,7 @@ class PagesController < ApplicationController
 
     if @page.save
       flash[:notice] = 'Page created successfully'
-      redirect_to pages_path
+      redirect_to pages_path(subject_id: @subject.id)
     else
       render('new')
     end
@@ -32,7 +35,7 @@ class PagesController < ApplicationController
   def update
     if @page.update page_params
       flash[:notice] = 'Page updated successfully'
-      redirect_to page_path(@page)
+      redirect_to page_path(@page, subject_id: @subject.id)
     else
       render 'edit'
     end
@@ -43,7 +46,7 @@ class PagesController < ApplicationController
   def destroy
     @page.destroy
     flash[:notice] = "Page '#{@page.name}' deleted successfully"
-    redirect_to pages_path
+    redirect_to pages_path(subject_id: @subject.id)
   end
 
   private
@@ -53,10 +56,6 @@ class PagesController < ApplicationController
                                  :subject_id)
   end
 
-  def find_pages
-    @pages = Page.sorted
-  end
-
   def set_page_count
     @page_count = Page.count
     @page_count += 1 if %w[new create].include? params[:action]
@@ -64,5 +63,9 @@ class PagesController < ApplicationController
 
   def find_page
     @page = Page.find(params[:id])
+  end
+
+  def find_subject
+    @subject = Subject.find params[:subject_id]
   end
 end
