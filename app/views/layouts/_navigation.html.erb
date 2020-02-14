@@ -1,0 +1,16 @@
+<% subjects ||= [] %>
+<ul>
+  <li><%= link_to_unless_current 'Admin Menu', admin_path %></li>
+  <li><%= link_to_unless_current 'Home', root_path %></li>
+  <% subjects.each do |subject| %>
+    <li>
+      <%= subject.name %>
+      <ul>
+        <% subject.pages.visible.sorted.each do |page| %>
+          <li><%= link_to_unless_current( page.name, public_show_path(page.permalink))
+            %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>

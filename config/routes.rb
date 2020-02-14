@@ -3,7 +3,9 @@
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   # rubocop:enable Metrics/BlockLength
-  root 'access#menu'
+  root to: 'public#index'
+
+  get 'show/:permalink', to: 'public#show', as: 'public_show'
 
   get 'admin', to: 'access#menu'
   get 'access/menu'
