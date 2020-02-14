@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Subject < ApplicationRecord
+  acts_as_list
+
   has_many :pages
 
   validates :name,
