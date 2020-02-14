@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   before_action :find_pages, only: [:index]
   before_action :find_page, only: %i[show edit update delete destroy]
   before_action :set_page_count, only: %i[edit update new create]
+  before_action :confirm_login
 
   def index; end
 

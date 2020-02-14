@@ -12,6 +12,12 @@ class AdminUser < ApplicationRecord
   EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i.freeze
   FORBIDDEN_USERNAMES = %w[littlebopeep humptydumpty marymary].freeze
 
+  class << self
+    def sorted
+      order 'last_name ASC, first_name ASC'
+    end
+  end
+
   validates :first_name,
             presence: true,
             length: {
@@ -40,6 +46,10 @@ class AdminUser < ApplicationRecord
             confirmation: true
 
   validate :username_allowed
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 
   private
 

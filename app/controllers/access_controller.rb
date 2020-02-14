@@ -37,12 +37,4 @@ class AccessController < ApplicationController
     found_user = AdminUser.where(username: params[:username]).first
     found_user&.authenticate params[:password]
   end
-
-  def confirm_login
-    return if session[:user_id]
-
-    flash[:notice] = 'Please log in.'
-    redirect_to access_login_path
-    # redirect_to prevents requested action from running
-  end
 end

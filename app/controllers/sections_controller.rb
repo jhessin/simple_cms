@@ -4,6 +4,7 @@ class SectionsController < ApplicationController
   before_action :find_sections, only: [:index]
   before_action :find_section, only: %i[show edit update delete destroy]
   before_action :set_section_count, only: %i[edit update new create]
+  before_action :confirm_login
 
   def index; end
 

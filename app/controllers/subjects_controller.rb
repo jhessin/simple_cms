@@ -5,6 +5,7 @@ class SubjectsController < ApplicationController
   before_action :find_subjects, only: [:index]
   before_action :find_subject, only: %i[show edit update delete destroy]
   before_action :set_subject_count, only: %i[edit update new create]
+  before_action :confirm_login
 
   def index
     logger.debug('### Testing the logger. ###')
