@@ -1,15 +1,20 @@
 # frozen_string_literal: true
 
 class SectionsController < ApplicationController
-  before_action :find_sections, only: [:index]
+  before_action :set_page
   before_action :find_section, only: %i[show edit update delete destroy]
   before_action :set_section_count, only: %i[edit update new create]
   before_action :confirm_login
 
-  def index; end
+  def index
+    @sections = Section.visible.where(page_id: @page.id)
+  end
 
   def new
-    @section = Section.new
+    @section = Section.new(
+      position: @section_count,
+      page: @page
+    )
   end
 
   def create
@@ -17,7 +22,7 @@ class SectionsController < ApplicationController
 
     if @section.save
       flash[:notice] = 'Section created successfully'
-      redirect_to sections_path
+      redirect_to sections_path(page_id: @page.id)
     else
       flash[:error] = 'Error creating section'
       render 'new'
@@ -31,7 +36,7 @@ class SectionsController < ApplicationController
   def update
     if @section.update section_params
       flash[:notice] = 'Section updated successfully'
-      redirect_to section_path(@section)
+      redirect_to section_path(@section, page_id: @page.id)
     else
       flash[:error] = 'Error updating section'
       render 'edit'
@@ -43,7 +48,7 @@ class SectionsController < ApplicationController
   def destroy
     @section.destroy
     flash[:notice] = "Section '#{@section.name}' deleted successfully"
-    redirect_to sections_path
+    redirect_to sections_path(page_id: @page.id)
   end
 
   private
@@ -53,8 +58,8 @@ class SectionsController < ApplicationController
                                     :content_type, :content)
   end
 
-  def find_sections
-    @sections = Section.sorted
+  def set_page
+    @page = Page.find params[:page_id]
   end
 
   def find_section

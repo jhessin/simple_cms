@@ -1,7 +1,7 @@
 <% subjects ||= [] %>
 <ul>
-  <li><%= link_to_unless_current 'Admin Menu', admin_path %></li>
   <li><%= link_to_unless_current 'Home', root_path %></li>
+  <li><%= link_to_unless_current 'Admin Menu', admin_path %></li>
   <% subjects.each do |subject| %>
     <li>
       <%= subject.name %>

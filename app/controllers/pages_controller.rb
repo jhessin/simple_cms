@@ -15,7 +15,8 @@ class PagesController < ApplicationController
   def new
     @page = Page.new(
       name: 'New Page',
-      subject_id: @subject.id
+      subject_id: @subject.id,
+      position: @page_count
     )
   end
 
