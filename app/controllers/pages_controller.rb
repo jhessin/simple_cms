@@ -22,6 +22,7 @@ class PagesController < ApplicationController
 
   def create
     @page = Page.new(page_params)
+    @page.subject = @subject
 
     if @page.save
       flash[:notice] = 'Page created successfully'
@@ -53,12 +54,11 @@ class PagesController < ApplicationController
   private
 
   def page_params
-    params.require(:page).permit(:name, :permalink, :position, :visible,
-                                 :subject_id)
+    params.require(:page).permit(:name, :permalink, :position, :visible)
   end
 
   def set_page_count
-    @page_count = Page.count
+    @page_count = @subject.pages.count
     @page_count += 1 if %w[new create].include? params[:action]
   end
 

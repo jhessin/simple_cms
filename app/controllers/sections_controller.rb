@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class SectionsController < ApplicationController
-  before_action :set_page
+  before_action :find_page
   before_action :find_section, only: %i[show edit update delete destroy]
   before_action :set_section_count, only: %i[edit update new create]
   before_action :confirm_login
 
   def index
-    @sections = Section.visible.where(page_id: @page.id)
+    @sections = @page.sections.sorted
   end
 
   def new
@@ -19,6 +19,7 @@ class SectionsController < ApplicationController
 
   def create
     @section = Section.new section_params
+    @section.page = @page
 
     if @section.save
       flash[:notice] = 'Section created successfully'
@@ -54,11 +55,11 @@ class SectionsController < ApplicationController
   private
 
   def section_params
-    params.require(:section).permit(:name, :page_id, :position, :visible,
-                                    :content_type, :content)
+    params.require(:section).permit(:name, :position, :visible, :content_type,
+                                    :content)
   end
 
-  def set_page
+  def find_page
     @page = Page.find params[:page_id]
   end
 
@@ -67,7 +68,7 @@ class SectionsController < ApplicationController
   end
 
   def set_section_count
-    @section_count = Section.count
+    @section_count = @page.sections.count
     @section_count += 1 if %w[new create].include? params[:action]
   end
 end
